@@ -926,7 +926,12 @@ def dialog_username_extractor(buttons):
                 person_list.append(person.find_element_by_xpath(read_xpath(dialog_username_extractor.__name__,"person"))
                                    .find_elements_by_tag_name("a")[1].text)
             except IndexError:
-                pass  # Element list is too short to have a [1] element
+                # Element list is too short to have a [1] element
+                try:
+                    person_list.append(person.find_element_by_xpath(read_xpath(dialog_username_extractor.__name__,"person"))
+                                       .find_elements_by_tag_name("a")[0].text)
+                except IndexError:
+                    pass  # Element list is too short to have a [0] element
 
     return person_list
 
